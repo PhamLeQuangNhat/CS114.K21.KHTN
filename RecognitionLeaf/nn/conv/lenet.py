@@ -26,7 +26,8 @@ class LeNet:
         model.add(MaxPooling2D(pool_size=(2,2), strides=(2,2)))
 
         # seconde set CONV => RELU => POOL
-        model.add(CONV2D(50, (5,5), padding="same"))
+        model.add(CONV2D(50, (5,5), padding="same",
+                  input_shape=inputShape))
         model.add(Activation("relu"))
         model.add(MaxPooling2D(pool_size=(2,2), strides=(2,2)))
 
