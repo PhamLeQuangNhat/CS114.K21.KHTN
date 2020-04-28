@@ -26,7 +26,7 @@ class NeuralNetwork:
         # construct and return a string that represents the network
         # architecture
         return "NeuralNetwork: {}".format("-".join(str(l) for l in self.layers))
-    """
+    
     def sigmoid(self, x):
         # compute and return the sigmoid activation value for a
         # given input value
@@ -36,6 +36,25 @@ class NeuralNetwork:
         # compute the derivative of the sigmoid function ASSUMING
         # that ‘x‘ has already been passed through the ‘sigmoid‘ function
         return x * (1 - x)
+
+    def fit(self, X, y, epochs=1000, displayUpdate=100):
+        # insert a column of 1’s as the last entry in the feature
+        # matrix -- this little trick allows us to treat the bias
+        # as a trainable parameter within the weight matrix
+        X = np.c_[X, np.ones((X.shape[0]))]
+
+        # loop over the desired number of epochs
+        for epoch in np.arange(0, epochs):
+            # loop over each individual data point and train
+            # our network on it
+            for (x, target) in zip(X, y):
+                self.fit_partial(x, target)
+
+            # check to see if we should display a training update
+            if epoch == 0 or (epoch + 1) % displayUpdate == 0:
+                loss = self.calculate_loss(X, y)
+                print("[INFO] epoch={}, loss={:.7f}".format(
+                    epoch + 1, loss))
 
     def fit_partial(self, x, y):
         # construct our list of output activations for each layer
@@ -99,24 +118,6 @@ class NeuralNetwork:
             # place
             self.W[layer] += -self.alpha * A[layer].T.dot(D[layer]) 
 
-    def fit(self, X, y, epochs=1000, displayUpdate=100):
-        # insert a column of 1’s as the last entry in the feature
-        # matrix -- this little trick allows us to treat the bias
-        # as a trainable parameter within the weight matrix
-        X = np.c_[X, np.ones((X.shape[0]))]
-
-        # loop over the desired number of epochs
-        for epoch in np.arange(0, epochs):
-            # loop over each individual data point and train
-            # our network on it
-            for (x, target) in zip(X, y):
-                self.fit_partial(x, target)
-
-            # check to see if we should display a training update
-            if epoch == 0 or (epoch + 1) % displayUpdate == 0:
-                loss = self.calculate_loss(X, y)
-                print("[INFO] epoch={}, loss={:.7f}".format(
-                    epoch + 1, loss))
 
     def predict(self, X, addBias=True):
         # initialize the output prediction as the input features -- this
@@ -145,4 +146,3 @@ class NeuralNetwork:
 
         # return loss
         return loss 
-"""

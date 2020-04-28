@@ -5,6 +5,8 @@ from sklearn.metrics import classification_report
 from dataloader.simpledatasetloader import SimpleDatasetLoader
 from preprocessing.simplepreprocessor import SimplePreprocessor
 from imutils import paths
+import os
+import numpy as np
 
 # grab the list of images 
 print ("[INFO] loading images ...")
@@ -37,6 +39,6 @@ nn.fit(trainX, trainY, epochs=1000)
 
 # evaluate the network
 print("[INFO] evaluating network...")
-predictions = nn.predict(X)
+predictions = nn.predict(testX)
 print(classification_report(testY.argmax(axis=1), predictions.argmax(axis=1),
     target_names=classNames))
