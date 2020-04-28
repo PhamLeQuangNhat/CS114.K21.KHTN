@@ -28,6 +28,7 @@ sp = SimplePreprocessor(32,32)
 sdl = SimpleDatasetLoader(preprocessors=[sp])
 (data, labels) = sdl.load(imagePaths, verbose=100)
 data = data.astype("float") / 255.0
+data = data.reshape((data.shape[0], 3072))
 
 # partition the data into training and testing splits using 75% of
 # the data for training and the remaining 25% for testing
@@ -38,10 +39,10 @@ test_size=0.25, random_state=42)
 trainY = LabelBinarizer().fit_transform(trainY)
 testY = LabelBinarizer().fit_transform(testY)
 
-# define the 1024-512-128-32 architecture using keras
+# define the 3072-1024-512-32 architecture using keras
 model = Sequential()
-model.add(Dense(512, input_shape=(1024,), activation="sigmoid"))
-model.add(Dense(128, activation="sigmoid"))
+model.add(Dense(1024, input_shape=(3072,), activation="relu"))
+model.add(Dense(512, activation="relu"))
 model.add(Dense(32, activation="softmax"))
 
 # train the model using SGD
@@ -50,25 +51,11 @@ sgd = SGD(0.01)
 model.compile(loss="categorical_crossentropy", optimizer=sgd,
              metrics=["accuracy"])
 H = model.fit(trainX, trainY, validation_data=(testX, testY),
-            epochs=100, batch_size=100)
+            epochs=100, batch_size=32)
 
 # evaluate the network
 print("[INFO] evaluating network...")
-predictions = model.predict(testX, batch_size=100)
+predictions = model.predict(testX, batch_size=32)
 print(classification_report(testY.argmax(axis=1),
       predictions.argmax(axis=1),
       target_names=classNames))
-
-# plot the training loss and accuracy
-plt.style.use("ggplot")
-plt.figure()
-plt.plot(np.arange(0, 100), H.history["loss"], label="train_loss")
-plt.plot(np.arange(0, 100), H.history["val_loss"], label="val_loss")
-plt.plot(np.arange(0, 100), H.history["acc"], label="train_acc")
-plt.plot(np.arange(0, 100), H.history["val_acc"], label="val_acc")
-plt.title("Training Loss and Accuracy")
-plt.xlabel("Epoch #")
-plt.ylabel("Loss/Accuracy")
-plt.legend()
-
-
