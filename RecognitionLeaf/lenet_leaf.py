@@ -7,7 +7,7 @@ from preprocessing.simplepreprocessor import SimplePreprocessor
 
 from dataloader.simpledatasetloader import SimpleDatasetLoader
 
-from nn.conv.shallownet import ShallowNet
+from nn.conv.lenet import LeNet
 
 from keras.optimizers import SGD
 from imutils import paths
@@ -40,7 +40,7 @@ testY = LabelBinarizer().fit_transform(testY)
 
 # initialize the optimizer and model
 print("[INFO] compiling model...")
-opt = SGD(lr=0.005)
+opt = SGD(lr=0.01)
 model = ShallowNet.build(width=32, height=32, depth=3, classes=32)
 model.compile(loss="categorical_crossentropy", optimizer=opt,
                     metrics=["accuracy"])
