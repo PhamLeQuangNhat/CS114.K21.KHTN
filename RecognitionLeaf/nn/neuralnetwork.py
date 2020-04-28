@@ -116,7 +116,7 @@ class NeuralNetwork:
             # this value by some small learning rate and adding to our
             # weight matrix -- this is where the actual "learning" takes
             # place
-            self.W[layer] += -self.alpha * A[layer].T.dot(D[layer]) 
+            self.W[layer] += -self.lr * A[layer].T.dot(D[layer]) 
 
 
     def predict(self, X, addBias=True):
