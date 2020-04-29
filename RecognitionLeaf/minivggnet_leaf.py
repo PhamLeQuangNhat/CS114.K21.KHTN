@@ -31,7 +31,7 @@ sdl = SimpleDatasetLoader(preprocessors=[sp,iap])
 data = data.astype("float") / 255.0
 
 # partition the data into training:75% and testing:25%
-(trainX, testX, trainY, testY) = train_test_split(data, labels
+(trainX, testX, trainY, testY) = train_test_split(data, labels,
                             test_size=0.25, random_state=42)
 
 # convert the labels from intergers to vectors
@@ -40,9 +40,9 @@ testY  = LabelBinarizer().fit_transform(testY)
 
 # initialize the optimizer and model
 print("[INFO] compiling model...")
-opt = SDG(lr=0.01)
+opt = SGD(lr=0.01)
 model = MiniVGGNet.build(width=32, height=32, depth=3, classes=32)
-model.compile(loss="categorical_crossentropy", optimizer=opt
+model.compile(loss="categorical_crossentropy", optimizer=opt,
              metrics=["accuracy"])
 
 # train the network
