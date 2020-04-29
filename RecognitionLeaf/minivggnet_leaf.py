@@ -41,7 +41,7 @@ testY  = LabelBinarizer().fit_transform(testY)
 # initialize the optimizer and model
 print("[INFO] compiling model...")
 opt = SDG(lr=0.01)
-model = MiniVGGNet.buid(width=32, height=32, depth=3, classes=32)
+model = MiniVGGNet.build(width=32, height=32, depth=3, classes=32)
 model.compile(loss="categorical_crossentropy", optimizer=opt
              metrics=["accuracy"])
 
