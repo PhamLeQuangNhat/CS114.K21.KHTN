@@ -1,43 +1,54 @@
-from sklearn.neighbors import KNeighborsClassifier
-
-# convert labels represented as strings to integers
-from sklearn.preprocessing import LabelEncoder
-
-# create training and testing splits
-from sklearn.model_selection import train_test_split
-
-# evaluate the performance of classifier and
-# print a nicely formatted table of results to console
 from sklearn.metrics import classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelBinarizer
+
+from preprocessing.simplepreprocessor import SimplePreprocessor
+from preprocessing.imagetoarraypreprocessor import ImageToArrayPreprocessor
 
 from dataloader.simpledatasetloader import SimpleDatasetLoader
-from preprocessing.simplepreprocessor import SimplePreprocessor
+
+from sklearn.neighbors import KNeighborsClassifier
+
 from imutils import paths
+import os
+import numpy as np 
 
 # grab the list of images 
 print ("[INFO] loading images ...")
 imagePaths = list(paths.list_images("Dataset Leaf"))
 #print(len(imagePaths))
 
-# initialize the image preprocessor, load the data set from disk
-# and reshape the data matrix
-sp = SimplePreprocessor(32,32)
-sdl = SimpleDatasetLoader(preprocessors=[sp])
-(data, labels) = sdl.load(imagePaths, verbose=100)
-data = data.reshape((data.shape[0], 3072))
+classNames = [pt.split(os.path.sep)[-2] for pt in imagePaths]
+classNames = [str(x) for x in np.unique(classNames)]
 
-# encode the labels as integers
-le = LabelEncoder()
-labels = le.fit_transform(labels)
+
+# initialize the image preprocessors
+sp = SimplePreprocessor(32,32)
+iap = ImageToArrayPreprocessor()
+
+# load data and reshape (N, 3072) with N = len(imagePaths)
+sdl = SimpleDatasetLoader(preprocessors=[sp,iap])
+(data, labels) = sdl.load(imagePaths, verbose=100)
+data = data.astype("float") / 255.0
+data = data.reshape((data.shape[0], 3072))
 
 # partition the data into training: 75%, testing: 25%
 (trainX, testX, trainY, testY) = train_test_split(data, labels, 
                                  test_size=0.25, random_state=42)
 
-# train and evaluate a k-NN classifier on the raw pixel intensities
-print("[INFO] evaluating k-NN classifier ...")
+# convert the labels from intergers to vectors
+trainY = LabelBinarizer().fit_transform(trainY)
+testY  = LabelBinarizer().fit_transform(testY)
+
+# train the k_NN
+print("[INFO] training k_NN...")
 model = KNeighborsClassifier(n_neighbors=1, n_jobs=-1)
 model.fit(trainX, trainY)
 
-print(classification_report(testY, model.predict(testX), 
-    target_names=le.classes_))
+# evaluate a k-NN 
+print("[INFO] evaluating K_NN...")
+predictions = model.predict(testX)
+print(classification_report(testY.argmax(axis=1),
+     predictions.argmax(axis=1),
+     target_names=classNames))
+

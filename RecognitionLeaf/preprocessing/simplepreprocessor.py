@@ -10,17 +10,16 @@ class SimplePreprocessor:
         self.inter = inter
     
     def preprocess(self, image):
-        """
+     
         # grab the dimesions of the image and then initialize
         # the deltas to use when cropping
         (h, w) = image.shape[:2]
         dW = 0
         dH = 0
 
-        # if the width is smller than the height, then resize
-        # along the width (i,e., the smller dimension) and then 
-        # update the deltas to crop the height to the desired
-        # demension
+        # if the width is smller than the height,so resize
+        # along the width and then update the deltas 
+        # to crop the height to the desired demension
         if w < h:
             image =imutils.resize(image, width=self.width, inter=self.inter)
             dH = int((image.shape[0] - self.height) / 2.0)
@@ -41,5 +40,5 @@ class SimplePreprocessor:
         # finally, resize the image to the provided spatial
         # demensions to ensure ourput image is slways a fixed
         # size
-        """
+       
         return cv2.resize(image, (self.width, self.height), interpolation=self.inter)
