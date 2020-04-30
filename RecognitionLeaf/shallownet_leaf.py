@@ -10,12 +10,18 @@ from dataloader.simpledatasetloader import SimpleDatasetLoader
 from nn.conv.shallownet import ShallowNet
 
 from keras.optimizers import SGD
+from keras.preprocessing.image import ImageDataGenerator
+
 from imutils import paths
 import os
 import numpy as np 
 
-# grab the list of images that we’ll be describing, then extract
-# the class label names from the image paths
+# construct the image generator for data augmentation
+aug = ImageDataGenerator(rotation_range=30, width_shift_range=0.1,
+height_shift_range=0.1, shear_range=0.2, zoom_range=0.2,
+horizontal_flip=True, fill_mode="nearest")
+
+# grab the list of images 
 print("[INFO] loading images...")
 imagePaths = list(paths.list_images('Dataset Leaf'))
 
@@ -40,20 +46,23 @@ testY = LabelBinarizer().fit_transform(testY)
 
 # initialize the optimizer and model
 print("[INFO] compiling model...")
-opt = SGD(lr=0.005)
+#opt = SGD(lr=0.03)
+opt = SGD(lr=0.01, decay=0.01 / 50, momentum=0.9, nesterov=True)
 model = ShallowNet.build(width=32, height=32, depth=3, classes=32)
 model.compile(loss="categorical_crossentropy", optimizer=opt,
-                    metrics=["accuracy"])
+                metrics=["accuracy"])
 
 # train the network
 print("[INFO] training network...")
-H = model.fit(trainX, trainY, validation_data=(testX, testY),
-             batch_size=32, epochs=100, verbose=1)
+model.fit_generator(aug.flow(trainX, trainY, batch_size=32),
+             	  validation_data=(testX, testY), epochs=50,
+		steps_per_epoch=len(trainX) // 32, verbose=1)
 
 # evaluate the network
-print("[INFO] evaluating network...")
+print("[INFO] evaluating network Shallownet used decay=0.01/50...")
 predictions = model.predict(testX, batch_size=32)
 print(classification_report(testY.argmax(axis=1),
       predictions.argmax(axis=1),
       target_names=classNames))
+
 
