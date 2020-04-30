@@ -40,5 +40,4 @@ class SimplePreprocessor:
         # finally, resize the image to the provided spatial
         # demensions to ensure ourput image is slways a fixed
         # size
-       
         return cv2.resize(image, (self.width, self.height), interpolation=self.inter)
