@@ -82,7 +82,7 @@ print(Xtrain.shape, Xtest.shape)
 print("[INFO] training k_NN ...")
 model = KNeighborsClassifier(n_neighbors=1, n_jobs=-1)
 model.fit(Xtrain, trainY)
-
+classNames = ["Sarcastic", "Not Sarcastic"]
 # evaluate a k-NN 
 print("[INFO] evaluating K_NN...")
 predictions = model.predict(Xtest)
