@@ -28,7 +28,7 @@ for j in range(2):
         cv = CountVectorizer(stop_words='english')
         trainX = cv.fit_transform(trainX)
         testX  = cv.fit_transform(testX)
-    if j == 0:
+    if j == 1:
         print("[INFO] Used TfidfVectorizer ... ")
         tf = TfidfVectorizer(ngram_range=(1,2),stop_words='english')
         trainX = tf.fit_transform(trainX)
@@ -46,8 +46,8 @@ for j in range(2):
         if i == 3:
             model = SVC(kernel='linear')
             print(" [INFO] evaluating SVM...")
-    model.fit(trainX, trainY)
-    predictions = model.predict(testX)
-    print(classification_report(testY,predictions))
+    	model.fit(trainX, trainY)
+    	predictions = model.predict(testX)
+    	print(classification_report(testY,predictions))
 
 
