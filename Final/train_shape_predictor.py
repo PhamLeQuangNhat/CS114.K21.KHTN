@@ -11,6 +11,7 @@ def option():
     ap.add_argument("-m", "--model", required=True,
         help="path serialized dlib shape predictor model")
     args = vars(ap.parse_args())
+    return args 
 
 def main():
     args = option()
@@ -68,7 +69,7 @@ def main():
     # number of threads/CPU cores to be used when training -- we default
     # this value to the number of available cores on the system, but you
     # can supply an integer value here if you would like
-    options.num_threads = multiprocessing.cpu_count()
+    #options.num_threads = multiprocessing.cpu_count()
 
     # log our training options to the terminal
     print("[INFO] shape predictor options:")
