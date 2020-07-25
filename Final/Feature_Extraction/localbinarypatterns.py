@@ -14,7 +14,7 @@ class LocalBinaryPatterns:
         #eps=1e-7
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         lbp = feature.local_binary_pattern(gray, self.numPoints,self.radius, method="uniform")
-        """
+        
         (hist, _) = np.histogram(lbp.ravel(),
           bins=np.arange(0, self.numPoints + 3),
           range=(0, self.numPoints + 2))
@@ -23,5 +23,4 @@ class LocalBinaryPatterns:
         hist /= (hist.sum() + eps)
         # return the histogram of Local Binary Patterns
         return hist
-        """
-        return lbp
+        
