@@ -1,4 +1,4 @@
-# import thư viện cần thiết
+
 from preprocessing.simplepreprocessor import SimplePreprocessor
 from dataloader.simpledatasetloader import SimpleDatasetLoader
 from Feature_Extraction.localbinarypatterns import LocalBinaryPatterns
