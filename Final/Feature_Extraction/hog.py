@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 class HOG:
 		def __init__(self, orientations):
-			# store the orientations
+		    # store the orientations
 		    self.orientations = orientations
 		def preprocess(self, image):
 		    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

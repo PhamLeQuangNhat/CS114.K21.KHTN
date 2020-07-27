@@ -11,7 +11,7 @@ class LocalBinaryPatterns:
         # compute the Local Binary Pattern representation
         # of the image, and then use the LBP representation
         # to build the histogram of patterns
-        #eps=1e-7
+        eps=1e-7
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         lbp = feature.local_binary_pattern(gray, self.numPoints,self.radius, method="uniform")
         
