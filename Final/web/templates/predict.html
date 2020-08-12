@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+	<title>Your Prediction!</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body style="background-color:black"><div id="maintext" style="position:absolute; margin:auto; width:700px; height:300px; text-align:center; top:0; bottom: 0; left: 0; right: 0;">
+	<h1 class="text-light mb-5"> Your Prediction </h1>
+	<p class="text-light"> My algorithm gave this prediction: </p>
+    
+	<div class="results">
+
+    {% if prediction %}
+        <div id="response-container">
+            <!-- <img id="response_img" src="{{url_for('static', filename='image/new_image')}}" alt="apple broken"> -->
+        </div>
+    {% endif %}
+	{% if prediction == 1 %}
+	<h2 style="color:red;">It's an Apple</h2>
+	{% elif prediction == 2 %}
+	<h2 style="color:blue;">It's an Avocado</h2>
+	{% elif prediction == 3 %}
+	<h2 style="color:yellow;">It's a Banana</h2>
+	{% elif prediction == 4 %}
+	<h2 style="color:white;">It's a Coconut</h2>
+	{% elif prediction == 5 %}
+	<h2 style="color:green;">It's a Custard Apple</h2>
+	{% elif prediction == 6 %}
+	<h2 style="color:pink;">It's a Dragon Fruit</h2>
+	{% elif prediction == 7 %}
+	<h2 style="color:brown;">It's a Guava</h2>
+	{% elif prediction == 8 %}
+	<h2 style="color:purple;">It's a Mango</h2>
+	{% elif prediction == 9 %}
+	<h2 style="color:orange;">It's an Orange</h2>
+	{% elif prediction == 10 %}
+	<h2 style="color:gray;">It's a Plum</h2>
+	{% elif prediction == 11 %}
+	<h2 style="color:violet;">It's a Start Fruit</h2>
+	{% elif prediction == 12 %}
+	<h2 style="color:indigo;">It's a Watermelon</h2>
+	{% endif %}
+	</div>
+	<a href="/">
+	<input type="submit" value="Go Back..">
+    </a>
+    
+    <script defer>
+        if(document.querySelector('#response-container')){
+          var img = document.createElement('img');
+          img.id = "response-img";
+          img.alt = "response image";
+          img.src = `static/image/new_image?${Date.now()}`;
+          img.height = 430;
+          img.width = 360
+          var response_container = document.querySelector('#response-container');
+          response_container.insertBefore(img, response_container.childNodes[0]);
+        }
+    </script>
+</div>
+
+	<div style="text-align: center; background-color: orange; padding: 10px; font-weight: bold; font-size: 20px;">
+		Nhat Pham Le Quang - 18520120
+		<br>
+		University of Information Technology VNU-HCM
+	</div>
+</body>
+</html>
+
+
+
+	
