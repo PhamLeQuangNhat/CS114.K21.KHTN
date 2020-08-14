@@ -19,8 +19,10 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/prediction", methods=["GET","POST"])
+@app.route("/prediction", methods=["POST"])
 def prediction():
+    # if request.method == "GET":
+        # return render_template("predict.html")  # Case testing
     data = request.form.get("img-data")
     data = data.split(',')
     data = [int(num) for num in data]

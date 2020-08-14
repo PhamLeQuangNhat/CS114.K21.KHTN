@@ -1,29 +1,328 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Classify your Image!</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="static/scripts/index.js" defer></script>
-</head>
-<body style="background-color:black">
+	<head>
+		<title>Classify your Image!</title>
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+		<script src="static/scripts/index.js" defer></script>
+		<link rel="stylesheet" href="static/styles/index.css">
+	</head>
+	<body>
+		<div id="maintext">  
+			<h1> Upload your image to be classified! </h1>
+			<h4>(Please upload images less than 500kb in size)</h4>
+			<form method=post enctype=multipart/form-data id="upload-img" action="{{ url_for('prediction') }}">	
+				<p>
+					<input type="file" id="input-img" name="img" accept="image/*"/>
+					<input type="submit" id="input-img-submit" value="Upload">
+				</p>
+				<input type="text" id="input-img-data" name="img-data" hidden="true">
+			</form>
+		</div>
 
-<div id="maintext" style="position:absolute; margin:auto; width:700px; height:200px; text-align:center; top:0; bottom: 0; left: 0; right: 0;">  
-	<h1 class="text-light mb-2"> Upload your image to be classified! </h1>
-	<h4 class="text-light mb-5">(Please upload images less than 500kb in size)</h4>
-	<form method=post enctype=multipart/form-data id="upload-img" action="{{ url_for('prediction') }}">	
-		<p class="text-light">
-            <input type="file" id="input-img" name="img" accept="image/*"/>
-            <input type="submit" id="input-img-submit" value="Upload">
-		</p>
-        <input type="text" id="input-img-data" name="img-data" hidden="true">
-	</form>
-</div>
-
-	<div style="text-align: center; background-color: orange; padding: 10px; font-weight: bold; font-size: 20px;">
-		Nhat Pham Le Quang - 18520120
-		<br>
-		University of Information Technology VNU-HCM
-	</div>
-</body>
+		<!-- Background section -->
+		<p class="message">Nhat Pham Le Quang - 18520120<br>University of Information Technology VNU-HCM</p>
+		<div class="container"><img class="background" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg"/>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+			<div class="circle-container">
+			<div class="circle"></div>
+			</div>
+  </div>
+	</body>
 </html>
 
