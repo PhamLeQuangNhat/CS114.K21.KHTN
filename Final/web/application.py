@@ -30,3 +30,6 @@ def prediction():
         f.write(bytearray(data))
     result = fruit_pred.predict() + 1
     return render_template("predict.html", prediction=result)
+
+if __name__== "__main__":
+    app.run()
