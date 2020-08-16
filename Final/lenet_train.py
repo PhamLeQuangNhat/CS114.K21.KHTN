@@ -32,8 +32,8 @@ def main():
                   'Dragon_fruit','Guava','Mango','Orange','Plum',
                   'Start_fruit','Watermelon']
 
-    in_data = 'H5PY/train/train_normal.h5'
-    in_label = 'H5PY/train/labels_train.h5'
+    in_data = 'H5PY/train_normal_128.h5'
+    in_label = 'H5PY/labels_train_64_128.h5'
 
     # import the feature vector and trained labels
     h5f_data  = h5py.File(in_data, 'r')
@@ -47,9 +47,9 @@ def main():
 
     # reshape data matrix
     if K.image_data_format() == "channels_first":
-        data = data.reshape(data.shape[0],3,32,32)
+        data = data.reshape(data.shape[0],3,128,128)
     else:
-        data = data.reshape(data.shape[0],32,32,3)
+        data = data.reshape(data.shape[0],128,128,3)
     print(data.shape)    
     
     # split training: 80%, testing: 20%
@@ -65,7 +65,7 @@ def main():
     # initialize the optimizer and model
     print("[INFO] compiling model...")
     opt = SGD(lr=0.05)
-    model = LeNet.build(width=32, height=32, depth=3, classes=12)
+    model = LeNet.build(width=128, height=128, depth=3, classes=12)
     model.compile(loss="categorical_crossentropy", optimizer=opt,
                 metrics=["accuracy"])
     
@@ -80,6 +80,7 @@ def main():
 
     # evaluate the network
     print("[INFO] evaluating network...")
+    print("[INFO] shape feature: {}".format(data.shape))
     preds = model.predict(testX)
     print(classification_report(testY.argmax(axis=1),
                     preds.argmax(axis=1),

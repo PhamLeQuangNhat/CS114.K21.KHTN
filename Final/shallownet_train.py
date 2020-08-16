@@ -19,8 +19,6 @@ import argparse
 # construct the argument parser and parse the arguments
 def option():
     ap = argparse.ArgumentParser()
-    ap.add_argument("-d", "--dataset", required=True,
-                    help="path to input dataset")
     ap.add_argument("-o", "--output", required=True,
                 help="path to output loss/accuracy plot")
     ap.add_argument("-m", "--model", required=True,
@@ -31,9 +29,6 @@ def option():
 def main():
     args = option()
 
-    class_name = ['Apple','Avocado','Banana','Coconut','Custard_apple',
-                  'Dragon_fruit','Guava','Mango','Orange','Plum',
-                  'Start_fruit','Watermelon']
     class_name = ['Apple','Avocado','Banana','Coconut','Custard_apple',
                   'Dragon_fruit','Guava','Mango','Orange','Plum',
                   'Start_fruit','Watermelon']
@@ -92,10 +87,10 @@ def main():
     # plot the training loss and accuracy
     plt.style.use("ggplot")
     plt.figure()
-    plt.plot(np.arange(0, 100), H.history["loss"], label="train_loss")
-    plt.plot(np.arange(0, 100), H.history["val_loss"], label="val_loss")
-    plt.plot(np.arange(0, 100), H.history["accuracy"], label="train_acc")
-    plt.plot(np.arange(0, 100), H.history["val_accuracy"], label="val_acc")
+    plt.plot(np.arange(0, 40), H.history["loss"], label="train_loss")
+    plt.plot(np.arange(0, 40), H.history["val_loss"], label="val_loss")
+    plt.plot(np.arange(0, 40), H.history["accuracy"], label="train_acc")
+    plt.plot(np.arange(0, 40), H.history["val_accuracy"], label="val_acc")
     plt.title("Training Loss and Accuracy")
     plt.xlabel("Epoch #")
     plt.ylabel("Loss/Accuracy")
